@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HopIn_Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac95fd3e6fd132589957c57ca1c4d9f3509e5487")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a3b0859118e5939ff1511620ab37d87a76ca8ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("HopIn_Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HopIn_Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
