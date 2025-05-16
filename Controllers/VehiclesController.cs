@@ -24,8 +24,7 @@ namespace HopIn_Server.Controllers
 			return StatusCode(statusCode, response);
 		}
 
-		//[HttpGet("{id?}")]
-		[HttpGet]
+		[HttpGet("getById")]
 		public async Task<IActionResult> getVehicle(String? id) {
 			try {
 				var result = await _vehicleService.Get(id!);
@@ -38,6 +37,23 @@ namespace HopIn_Server.Controllers
 				return ApiResponse(500, false, "An unexpected error occurred.", errorMsg: e.Message);
 			}
 		}
+
+		[HttpGet("getByUser")]
+
+		public async Task<IActionResult> GetUserVehicles(string? uid)
+		{
+			try {
+				var result = await _vehicleService.GetVs(uid!);
+				if (!result.success) {
+					return ApiResponse(400,result.success,message:result.message);
+				}
+				return ApiResponse(200, result.success, message: result.message,data:result.vehiclesList);
+			}
+			catch (Exception e) {
+				return ApiResponse(500, false, "An unexpected error occurred.", errorMsg: e.Message);
+			}
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> createVehicle(UserVehicle vehicle)
 		{
@@ -48,6 +64,23 @@ namespace HopIn_Server.Controllers
 					return ApiResponse(400,result.success,result.message);
 				}
 				return ApiResponse(200, result.success, result.message);
+			}
+			catch (Exception e)
+			{
+				return ApiResponse(500, false, "An unexpected error occurred.", errorMsg: e.Message);
+			}
+		}
+		//[HttpGet("deleteById")]
+		[HttpDelete]
+		public async Task<IActionResult> DeleteVehicle(string? vehicleId)
+		{
+			try
+			{
+				var result = await _vehicleService.DeleteVehicle(vehicleId!);
+				if (!result.success) {
+					return ApiResponse(400,result.success,result.message);
+				}
+				return ApiResponse(200,result.success,result.message);
 			}
 			catch (Exception e)
 			{

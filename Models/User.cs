@@ -7,11 +7,15 @@ namespace HopIn_Server.Models
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.String)]
-		public string? userId { get; set; }
-		public string userName { get; set; } = null!;
+		public string userId { get; set; }
+		public string userFirstName { get; set; } = null!;
+		public string userLastName { get; set; } = null!;
 		public string userEmail { get; set; } = null!;
-		public string userPhone { get; set; } = null!;
-		public DateTime userCreaetedAt { get; set; } = DateTime.UtcNow;
+
+		public bool receiveEmailUpdates { get; set; } = false;
+
+		public Inbox? inbox {  get; set; }
+		public DateTime userCreatedAt { get; set; } = DateTime.UtcNow;
 
 	}
 }
