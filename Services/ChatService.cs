@@ -9,7 +9,7 @@ namespace HopIn_Server.Services
 	{
 		private readonly IMongoCollection<Chat> _chatCollection;
 		public ChatService(IOptions<DbSettings> databaseSettings) {
-			var mongoCLient = new MongoClient(databaseSettings.Value.connecitonString);
+			var mongoCLient = new MongoClient(databaseSettings.Value.connectionString);
 			var dbName = mongoCLient.GetDatabase(databaseSettings.Value.dbName);
 			_chatCollection = dbName.GetCollection<Chat>(databaseSettings.Value.collectionNames["chatsColl"]);
 		}

@@ -11,7 +11,7 @@ namespace HopIn_Server.Services
 	{
 		private readonly IMongoCollection<Inbox> _inboxCollection;
 		public InboxService(IOptions<DbSettings> databaseSetings) {
-			var mongoClient = new MongoClient(databaseSetings.Value.connecitonString);
+			var mongoClient = new MongoClient(databaseSetings.Value.connectionString);
 			var dbName = mongoClient.GetDatabase(databaseSetings.Value.dbName);
 			_inboxCollection = dbName.GetCollection<Inbox>(databaseSetings.Value.collectionNames["inboxColl"]);
 		}

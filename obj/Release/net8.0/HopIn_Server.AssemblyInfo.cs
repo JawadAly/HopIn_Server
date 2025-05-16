@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("HopIn_Server")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14af31bfcbd86e62b672621d5c7690631f1d6f0c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab4c694333a5056fc9d1ff5b5ebc6adebf6958c4")]
 [assembly: System.Reflection.AssemblyProductAttribute("HopIn_Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HopIn_Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
