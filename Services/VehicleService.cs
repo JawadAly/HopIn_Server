@@ -7,12 +7,12 @@ namespace HopIn_Server.Services
 {
 	public class VehicleService
 	{
-		private readonly IMongoCollection<UserVehicle> _vehicleCollection;
-		public VehicleService(IOptions<DbSettings> databaseSettings) {
-			var mongoClient = new MongoClient(databaseSettings.Value.connecitonString);
-			var databaseName = mongoClient.GetDatabase(databaseSettings.Value.dbName);
-			_vehicleCollection = databaseName.GetCollection<UserVehicle>(databaseSettings.Value.collectionNames["vehiclesColl"]);
-		}
+			private readonly IMongoCollection<UserVehicle> _vehicleCollection;
+			public VehicleService(IOptions<DbSettings> databaseSettings) {
+				var mongoClient = new MongoClient(databaseSettings.Value.connectionString);
+				var databaseName = mongoClient.GetDatabase(databaseSettings.Value.dbName);
+				_vehicleCollection = databaseName.GetCollection<UserVehicle>(databaseSettings.Value.collectionNames["vehiclesColl"]);
+			}
 
 		public async Task<List<UserVehicle>> GetAsync() => await _vehicleCollection.Find(_ => true).ToListAsync();
 		//public async Task<(bool success, string message, List<UserVehicle>? vehiclesList)> Get(string uId) {

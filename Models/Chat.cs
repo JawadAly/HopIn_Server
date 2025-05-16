@@ -10,10 +10,10 @@ namespace HopIn_Server.Models
 		public string? chatId { get; set; }
 
 		[BsonRepresentation(BsonType.String)]
-		public string person1Id { get; set; } = null!;
+		public string user1Id { get; set; } = null!;
 
 		[BsonRepresentation(BsonType.String)]
-		public string person2Id { get; set; } = null!;
+		public string user2Id { get; set; } = null!;
 		public List<Message> chatMessages { get; set; } = new List<Message>();
 		public DateTime chatLastUpdated { get; set; } = DateTime.UtcNow;
 	}

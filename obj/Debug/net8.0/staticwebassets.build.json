@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "nEgsDC9uwqeeh5PUEb82R9DQZ5uWUG9t/SgDf+0dtQs=",
+  "Hash": "En7NHMbasIO7ypunWZpEoiMCURNBmt99d6+tjCh14zA=",
   "Source": "HopIn_Server",
   "BasePath": "_content/HopIn_Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }
