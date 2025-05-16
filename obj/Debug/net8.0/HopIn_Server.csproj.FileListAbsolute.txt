@@ -40,3 +40,4 @@ C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\refint\HopIn_S
 C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.pdb
 C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.genruntimeconfig.cache
 C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\ref\HopIn_Server.dll
+C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.sourcelink.json
