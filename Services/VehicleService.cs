@@ -7,29 +7,14 @@ namespace HopIn_Server.Services
 {
 	public class VehicleService
 	{
-<<<<<<< HEAD
-			private readonly IMongoCollection<UserVehicle> _vehicleCollection;
-			public VehicleService(IOptions<DbSettings> databaseSettings) {
-				var mongoClient = new MongoClient(databaseSettings.Value.connectionString);
-				var databaseName = mongoClient.GetDatabase(databaseSettings.Value.dbName);
-				_vehicleCollection = databaseName.GetCollection<UserVehicle>(databaseSettings.Value.collectionNames["vehiclesColl"]);
-			}
 
-		public async Task<List<UserVehicle>> GetAsync() => await _vehicleCollection.Find(_ => true).ToListAsync();
-		//public async Task<(bool success, string message, List<UserVehicle>? vehiclesList)> Get(string uId) {
-		//	if (String.IsNullOrWhiteSpace(uId))
-		//	{
-		//		return (false, "User ID is required to fetch vehicles!", null);
-		//	}
-		//	var incomingVehicles = await _vehicleCollection.Find(_ => true).ToListAsync();
-		//	if (incomingVehicles.Any()) {
-		//		return (true,"Vehicles found!",incomingVehicles);
-		//	}
-		//}
-=======
+
+
+
+
 		private readonly IMongoCollection<UserVehicle> _vehicleCollection;
 		public VehicleService(IOptions<DbSettings> databaseSettings) {
-			var mongoClient = new MongoClient(databaseSettings.Value.connecitonString);
+			var mongoClient = new MongoClient(databaseSettings.Value.connectionString);
 			var databaseName = mongoClient.GetDatabase(databaseSettings.Value.dbName);
 			_vehicleCollection = databaseName.GetCollection<UserVehicle>(databaseSettings.Value.collectionNames["vehiclesColl"]);
 		}
@@ -46,7 +31,7 @@ namespace HopIn_Server.Services
 			}
 			return (false, "This user doesnt have any listed vehicles!",null);
 		}
->>>>>>> 4210fb51feebfd3b5d877e6ecd6e7765488326ce
+
 		public async Task<(bool success, string message, UserVehicle? vehicle)> Get(string id)
 		{
 			if (String.IsNullOrWhiteSpace(id))
@@ -76,8 +61,6 @@ namespace HopIn_Server.Services
 			await _vehicleCollection.InsertOneAsync(vehicle);
 			return (true, "Vehicle added successfully!");
 		}
-		//public async Task UpdateAsync(UserVehicle vehicle) => await _vehicleCollection.ReplaceOneAsync(x => x.vehicleId == vehicle.vehicleId,vehicle);
-		public async Task DeleteAsync(string id) => await _vehicleCollection.DeleteOneAsync(x => x.vehicleId == id);
 		public async Task<(bool success, string message)> DeleteVehicle(string id) {
 			if (string.IsNullOrEmpty(id)) {
 				return (false, "Vehicle ID is required!");
