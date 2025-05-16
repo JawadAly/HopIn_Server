@@ -40,6 +40,7 @@ C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\refint\HopIn_S
 C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.pdb
 C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.genruntimeconfig.cache
 C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\ref\HopIn_Server.dll
+<<<<<<< HEAD
 C:\Users\Ahmad Mustabassir\Source\Repos\HopIn_Server\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Ahmad Mustabassir\Source\Repos\HopIn_Server\bin\Debug\net8.0\appsettings.json
 C:\Users\Ahmad Mustabassir\Source\Repos\HopIn_Server\bin\Debug\net8.0\HopIn_Server.exe
@@ -80,3 +81,6 @@ C:\Users\Ahmad Mustabassir\Source\Repos\HopIn_Server\obj\Debug\net8.0\HopIn_Serv
 C:\Users\Ahmad Mustabassir\Source\Repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.genruntimeconfig.cache
 C:\Users\Ahmad Mustabassir\Source\Repos\HopIn_Server\obj\Debug\net8.0\ref\HopIn_Server.dll
 C:\Users\Ahmad Mustabassir\source\repos\HopIn_Server\bin\Debug\net8.0\nuget.config
+=======
+C:\Users\Noman Traders\source\repos\HopIn_Server\obj\Debug\net8.0\HopIn_Server.sourcelink.json
+>>>>>>> 4210fb51feebfd3b5d877e6ecd6e7765488326ce

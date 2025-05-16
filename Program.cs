@@ -5,9 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("MongoDBConfigs"));
+//services injected
 builder.Services.AddSingleton<VehicleService>();
+<<<<<<< HEAD
 builder.Services.AddSingleton<UserService>();
 
+=======
+builder.Services.AddSingleton<MessagingService>();
+builder.Services.AddSingleton<ChatService>();
+builder.Services.AddSingleton<InboxService>();
+>>>>>>> 4210fb51feebfd3b5d877e6ecd6e7765488326ce
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

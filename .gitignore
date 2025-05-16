@@ -1,1 +1,17 @@
 .vs/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+bin/
+obj/
+out/
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+*.vsidx
