@@ -27,16 +27,28 @@ namespace HopIn_Server.Controllers
 		[HttpPost]
 		public async Task<IActionResult> createInbox(Inbox inbox)
 		{
-			try {
+			try
+			{
 				var result = await _inboxService.createInbox(inbox);
-				if (!result.success) {
-					return ApiResponse(400,result.success,result.message);
+				if (!result.success)
+				{
+					return ApiResponse(400, result.success, result.message);
 				}
 				return ApiResponse(200, result.success, result.message);
 			}
-			catch (Exception e) {
+			catch (Exception e)
+			{
 				return ApiResponse(500, false, "An unexpected error occurred.", errorMsg: e.Message);
 			}
+		}
+
+
+		[HttpGet("{id}")]
+		public async Task<IActionResult> getInbox(string id)
+		{
+			var inbox = await _inboxService.GetInboxByIdAsync(id);
+			if (inbox == null) { return NotFound(); }
+			return Ok(inbox);
 		}
 
 	}

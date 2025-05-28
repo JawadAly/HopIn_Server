@@ -1,19 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ahmad Mustabassir\\Source\\Repos\\HopIn_Server\\HopIn_Server.csproj": {}
+    "C:\\Users\\Ahmad Mustabassir\\source\\repos\\HopIn_Server\\HopIn_Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ahmad Mustabassir\\Source\\Repos\\HopIn_Server\\HopIn_Server.csproj": {
+    "C:\\Users\\Ahmad Mustabassir\\source\\repos\\HopIn_Server\\HopIn_Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ahmad Mustabassir\\Source\\Repos\\HopIn_Server\\HopIn_Server.csproj",
+        "projectUniqueName": "C:\\Users\\Ahmad Mustabassir\\source\\repos\\HopIn_Server\\HopIn_Server.csproj",
         "projectName": "HopIn_Server",
-        "projectPath": "C:\\Users\\Ahmad Mustabassir\\Source\\Repos\\HopIn_Server\\HopIn_Server.csproj",
+        "projectPath": "C:\\Users\\Ahmad Mustabassir\\source\\repos\\HopIn_Server\\HopIn_Server.csproj",
         "packagesPath": "C:\\Users\\Ahmad Mustabassir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ahmad Mustabassir\\Source\\Repos\\HopIn_Server\\obj\\",
+        "outputPath": "C:\\Users\\Ahmad Mustabassir\\source\\repos\\HopIn_Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "C:\\Users\\Ahmad Mustabassir\\source\\repos\\HopIn_Server\\NuGet.Config",
           "C:\\Users\\Ahmad Mustabassir\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

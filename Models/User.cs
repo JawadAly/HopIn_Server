@@ -14,7 +14,8 @@ namespace HopIn_Server.Models
 
 		public bool receiveEmailUpdates { get; set; } = false;
 
-		public Inbox? inbox {  get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string inboxId { get; set; } = null!; // reference only
 		public DateTime userCreatedAt { get; set; } = DateTime.UtcNow;
 
 	}

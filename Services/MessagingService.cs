@@ -10,7 +10,7 @@ namespace HopIn_Server.Services
 		private readonly IMongoCollection<Message> _messagesCollection;
 
 		public MessagingService(IOptions<DbSettings> databaseSettings) {
-			var mongoClient = new MongoClient(databaseSettings.Value.connecitonString);
+			var mongoClient = new MongoClient(databaseSettings.Value.connectionString);
 			var dbName = mongoClient.GetDatabase(databaseSettings.Value.dbName);
 			_messagesCollection = dbName.GetCollection<Message>(databaseSettings.Value.collectionNames["messagesColl"]);
 		}

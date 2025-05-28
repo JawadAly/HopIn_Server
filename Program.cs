@@ -11,6 +11,7 @@ builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<MessagingService>();
 builder.Services.AddSingleton<ChatService>();
 builder.Services.AddSingleton<InboxService>();
+builder.Services.AddSingleton<RideService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
