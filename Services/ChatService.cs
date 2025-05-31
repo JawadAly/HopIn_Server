@@ -57,5 +57,51 @@ namespace HopIn_Server.Services
 			return (true, "Message Sent!");
 
 		}
+
+
+		public async Task<(bool success, string message,Chat? chat)> InitiateChatAsync(string senderId, string receiverId)
+		{
+			// Check if chat already exists
+			var existingChat = await _chatCollection
+				.Find(c => (c.person1Id == senderId && c.person2Id == receiverId) ||
+						   (c.person1Id == receiverId && c.person2Id == senderId))
+				.FirstOrDefaultAsync();
+
+			var psngrMsg = new Message
+			{
+				senderId = senderId,
+				content = "Hello there! I need a ride ASAP.",
+				msgCreatedAt = DateTime.UtcNow
+			};
+
+			if (existingChat != null)
+			{
+				// Chat already exists – add message to chat
+				var update = Builders<Chat>.Update
+					.Push(c => c.chatMessages, psngrMsg)
+					.Set(c => c.chatLastUpdated, DateTime.UtcNow);
+
+				await _chatCollection.UpdateOneAsync(
+					c => c.chatId == existingChat.chatId,
+					update);
+
+				return (true, "Message added to existing chat",existingChat);
+			}
+			else
+			{
+				// Create new chat
+				var newChat = new Chat
+				{
+					person1Id = senderId,
+					person2Id = receiverId,
+					chatMessages = new List<Message> { psngrMsg },
+					chatLastUpdated = DateTime.UtcNow
+				};
+
+				await _chatCollection.InsertOneAsync(newChat);
+				return (true, "Chat initiated",newChat);
+			}
+		}
+
 	}
 }

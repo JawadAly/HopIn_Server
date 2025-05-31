@@ -5,7 +5,7 @@ namespace HopIn_Server.Mappers
 {
     public static class RideMapper
     {
-        public static Ride ToRide(this CreateRideDto dto)
+        public static Ride ToRide(this CreateRideDto dto)   
         {
             return new Ride
             {
@@ -32,36 +32,26 @@ namespace HopIn_Server.Mappers
             };
         }
 
-
-
-
-
-
-        //public static Ride ToSearchRide(this SearchRideDto dto)
-        //{
-        //    return new Ride
-        //    {
-        //        startLocation = dto.startLocation,
-        //        startCoordinates = new Coordinates
-        //        {
-        //            Latitude = dto.startCoordinates.Latitude,
-        //            Longitude = dto.startCoordinates.Longitude
-        //        },
-        //        endLocation = dto.endLocation,
-        //        endCoordinates = new Coordinates
-        //        {
-        //            Latitude = dto.endCoordinates.Latitude,
-        //            Longitude = dto.endCoordinates.Longitude
-        //        },
-        //        rideDateTime = dto.rideDateTime,
-        //        reqSeats = dto.reqSeats
-        //    };
-        //}
-
-
-
-
-
-    }
+		//public static Ride ToSearchRide(this SearchRideDto dto)
+		//{
+		//	return new Ride
+		//	{
+		//		startLocation = dto.startLocation,
+		//		startCoordinates = new Coordinates
+		//		{
+		//			Latitude = dto.startCoordinates.Latitude,
+		//			Longitude = dto.startCoordinates.Longitude
+		//		},
+		//		endLocation = dto.endLocation,
+		//		endCoordinates = new Coordinates
+		//		{
+		//			Latitude = dto.endCoordinates.Latitude,
+		//			Longitude = dto.endCoordinates.Longitude
+		//		},
+		//		rideDateTime = dto.rideDate,
+		//		reqSeats = dto.reqSeats
+		//	};
+		//}
+	}
 
 }

@@ -47,6 +47,12 @@ namespace HopIn_Server.Services
 			await _userCollection.InsertOneAsync(newUser);
 			return (true, "User created successfully.");
 		}
+		public async Task<Inbox?> GetUserInbxById(string userId) {
+			var incomingUser = await _userCollection.Find(x=>x.userId == userId).FirstOrDefaultAsync();
+			if (string.IsNullOrEmpty(incomingUser.inboxId))
+				return null;
+			return await _inboxService.GetInboxByIdAsync(incomingUser.inboxId);
+		}
 
 
 

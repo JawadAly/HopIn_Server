@@ -7,7 +7,6 @@ namespace HopIn_Server.Services
 {
 	public class VehicleService
 	{
-
 		private readonly IMongoCollection<UserVehicle> _vehicleCollection;
 		public VehicleService(IOptions<DbSettings> databaseSettings) {
 			var mongoClient = new MongoClient(databaseSettings.Value.connectionString);

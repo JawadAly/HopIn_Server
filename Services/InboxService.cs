@@ -54,5 +54,17 @@ namespace HopIn_Server.Services
 
 
 		public async Task<Inbox?> GetInboxByIdAsync(string id) => await _inboxCollection.Find(u => u.inboxId == id).FirstOrDefaultAsync();
+
+		public async Task<(bool success,string messsage,List<Chat>? chatsList)> fetchInboxChats(User inbxUser) {
+			var userInbox = await _inboxCollection.Find(x => x.inboxId == inbxUser.inboxId).FirstOrDefaultAsync();
+			if (userInbox == null) {
+				return (false, "No inbox exists!", null);
+			}
+			if (userInbox.inbChats == null || !userInbox.inbChats.Any())
+				return (false, "Inbox found, but no chats exist.", null);
+
+			return (true,"Inbox found with chats!",userInbox.inbChats);
+		}
+		
 	}
 }
