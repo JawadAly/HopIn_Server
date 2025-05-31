@@ -7,7 +7,7 @@ namespace HopIn_Server.Models
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string? inboxId { get; set; } =  ObjectId.GenerateNewId().ToString();
+		public string inboxId { get; set; } = ObjectId.GenerateNewId().ToString();
 		public List<Chat> inbChats { get; set; } = new List<Chat>();
 		public DateTime inbCreatedAt { get; set; } = DateTime.UtcNow;
 		public DateTime inbUpdatedAt { get; set; } = DateTime.UtcNow;

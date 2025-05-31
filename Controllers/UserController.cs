@@ -1,4 +1,6 @@
-﻿using HopIn_Server.Models;
+﻿using HopIn_Server.Dtos;
+using HopIn_Server.Mappers;
+using HopIn_Server.Models;
 using HopIn_Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +11,12 @@ namespace HopIn_Server.Controllers
 	public class UserController : ControllerBase
 	{
 		private readonly UserService _userService;
+		private readonly InboxService _inboxService;
 
-		public UserController(UserService userService)
+		public UserController(UserService userService , InboxService inboxService)
 		{
 			_userService = userService;
+			_inboxService = inboxService;
 		}
 
 		[HttpGet]
@@ -28,22 +32,38 @@ namespace HopIn_Server.Controllers
 			return Ok(user);
 		}
 
+
+
+
+
+
+
+
+
+
 		[HttpPost]
-		public async Task<IActionResult> CreateUser([FromBody] User newUser)
+		public async Task<IActionResult> CreateUser([FromBody] CreateUserDto newUser)
 		{
-			var user = new User
-			{
-				userId = newUser.userId,
-				userFirstName = newUser.userFirstName,
-				userLastName= newUser.userLastName,
-				userEmail= newUser.userEmail,
-				receiveEmailUpdates= newUser.receiveEmailUpdates,
-				inbox = new Inbox(),
-				userCreatedAt = DateTime.UtcNow,
-			};
+			var inbox = new Inbox();
+			var (inboxSuccess, inboxMsg) = await _inboxService.createInbox(inbox);
+
+			if (!inboxSuccess)
+				return BadRequest(new { message = inboxMsg });
+
+			var user = newUser.ToUser(inbox.inboxId);
+
 			await _userService.CreateUserAsync(user);
-			return CreatedAtAction(nameof(GetUserById), new { id = newUser.userId }, newUser);
+			return CreatedAtAction(nameof(GetUserById), new { id = user.userId }, user);
 		}
+
+
+
+
+
+
+
+
+
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> UpdateUser(string id, [FromBody] User updatedUser)

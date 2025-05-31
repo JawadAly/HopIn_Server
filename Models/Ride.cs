@@ -45,6 +45,7 @@ namespace HopIn_Server.Models
 		public List<PassengerInfo> passengers { get; set; } = new List<PassengerInfo>();
 		public DateTime rideCreatedAt { get; set; } = DateTime.UtcNow;
 		public DateTime rideUpdatedAt { get; set; } = DateTime.UtcNow;
+		public int? reqSeats {get;set;}
 	}
 
 
