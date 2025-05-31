@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\HopIn_Server.props" />
-</Project>
