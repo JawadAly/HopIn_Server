@@ -34,20 +34,13 @@ namespace HopIn_Server.Services
 
         public async Task RemoveAsync(string id) =>
             await _rideCollection.DeleteOneAsync(x => x.rideId == id);
+        //public async Task<(bool success, string? riderId)> GetRidesRider(string rideId) {
+        //    var rider = await _rideCollection.Find(x => x.riderId == rideId).FirstOrDefaultAsync();
 
-        public async Task<(bool success, string message)> AddPassenger(string rideId, string passengerId, int seats)
+        //}
+        public async Task<(bool success, string message)> RequestRide(string rideId, string passengerId, int seats)
         {
-            var ride = await GetAsync(rideId);
-            if (ride == null)
-                return (false, "Ride not found");
-
-            if (ride.status != RideStatus.Active)
-                return (false, "Ride is not available for booking");
-
-            if (ride.bookedSeats + seats > ride.availableSeats)
-                return (false, "Not enough seats available");
-
-            var passengerInfo = new PassengerInfo
+			var passengerInfo = new PassengerInfo
             {
                 passengerId = passengerId,
                 requestedSeats = seats,
@@ -59,7 +52,8 @@ namespace HopIn_Server.Services
                 .Push(r => r.passengers, passengerInfo)
                 .Set(r => r.rideUpdatedAt, DateTime.UtcNow);
 
-            await _rideCollection.UpdateOneAsync(r => r.rideId == rideId, update);
+			await _rideCollection.UpdateOneAsync(r => r.rideId == rideId, update);
+
             return (true, "Passenger request added successfully");
         }
 
@@ -116,19 +110,16 @@ namespace HopIn_Server.Services
             }
         }
 
-
-
-
-
-
-
-
-
         public async Task<List<Ride>> GetPublishedRidesAsync(string userId)
         {
 
             return await _rideCollection.Find(x => x.riderId == userId).ToListAsync();
 
         }
-    }
+
+
+
+
+
+	}
 }
