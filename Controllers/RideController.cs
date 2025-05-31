@@ -163,9 +163,54 @@ namespace HopIn_Server.Controllers
 
 
 
+
+
+
+
+
+
+
+
+
+
+        [HttpPost("search")]
+        public async Task<IActionResult> SearchRides([FromBody] SearchRideDto request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return ApiResponse(400, false, "Invalid request data",
+                        errorMsg: string.Join(", ", ModelState.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage)));
+                }
+
+                var result = await _rideService.SearchRidesAsync(request);
+
+                if (!result.success && result.message == "No rides found!")
+                {
+                    return ApiResponse(200, result.success, result.message, data: null);
+                }
+
+                return ApiResponse(200, result.success, result.message, data: result.searchedRidesList);
+            }
+            catch (Exception ex)
+            {
+                return ApiResponse(500, false, "An unexpected error occurred", errorMsg: ex.Message);
+            }
+        }
+
+
+
+
+
+
+
+
     }
 
-   
+
     public class AddPassengerRequest
     {
         [Required]

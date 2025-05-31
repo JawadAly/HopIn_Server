@@ -1,4 +1,5 @@
 ﻿using HopIn_Server.Configurations;
+using HopIn_Server.Dtos;
 using HopIn_Server.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -8,12 +9,15 @@ namespace HopIn_Server.Services
     public class RideService
     {
         private readonly IMongoCollection<Ride> _rideCollection;
+        private readonly UserService _userService;
 
-        public RideService(IOptions<DbSettings> databaseSettings)
+
+        public RideService(IOptions<DbSettings> databaseSettings , UserService userService)
         {
             var mongoClient = new MongoClient(databaseSettings.Value.connectionString);
             var database = mongoClient.GetDatabase(databaseSettings.Value.dbName);
             _rideCollection = database.GetCollection<Ride>(databaseSettings.Value.collectionNames["ridescoll"]);
+            _userService = userService;
         }
 
         public async Task<List<Ride>> GetAsync() =>
@@ -58,6 +62,60 @@ namespace HopIn_Server.Services
             await _rideCollection.UpdateOneAsync(r => r.rideId == rideId, update);
             return (true, "Passenger request added successfully");
         }
+
+
+
+
+
+
+
+
+        public async Task<(bool success, string message, List<RideWithUsernameDto>? searchedRidesList)> SearchRidesAsync(SearchRideDto dto)
+        {
+            try
+            {
+                var filterBuilder = Builders<Ride>.Filter;
+
+                var rideDateUtc = dto.rideDate;
+                var rideDateStartUtc = rideDateUtc.Date.ToUniversalTime();
+                var rideDateEndUtc = rideDateStartUtc.AddDays(1);
+
+                var filter = filterBuilder.Eq(r => r.startLocation, dto.startLocation) &
+                             filterBuilder.Eq(r => r.endLocation, dto.endLocation) &
+                             filterBuilder.Gte(r => r.rideDateTime, rideDateStartUtc) &
+                             filterBuilder.Lt(r => r.rideDateTime, rideDateEndUtc) &
+                             filterBuilder.Gte(r => r.availableSeats, dto.reqSeats) &
+                             filterBuilder.Eq(r => r.status, RideStatus.Active);
+
+                var rides = await _rideCollection.Find(filter).ToListAsync();
+
+                if (rides == null || !rides.Any())
+                {
+                    return (false, "No rides found!", null);
+                }
+
+                // Fetch usernames for each ride
+                var resultList = new List<RideWithUsernameDto>();
+                foreach (var ride in rides)
+                {
+                    var user = await _userService.GetUserByIdAsync(ride.riderId);
+                    var username = user != null ? $"{user.userFirstName} {user.userLastName}" : "Unknown";
+
+                    resultList.Add(new RideWithUsernameDto
+                    {
+                        Ride = ride,
+                        Username = username
+                    });
+                }
+
+                return (true, "Rides found", resultList);
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Error: {ex.Message}", null);
+            }
+        }
+
 
 
 

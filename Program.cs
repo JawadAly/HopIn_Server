@@ -1,5 +1,6 @@
 using HopIn_Server.Configurations;
 using HopIn_Server.Services;
+using HopIn_Server.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,15 @@ builder.Services.AddSingleton<MessagingService>();
 builder.Services.AddSingleton<ChatService>();
 builder.Services.AddSingleton<InboxService>();
 builder.Services.AddSingleton<RideService>();
+
+
+
+
+
+
+builder.Services.AddSignalR();
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -30,6 +40,14 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+
+
+app.MapHub<MessagingHub>("/messaginghub");
+
+
+app.MapControllers();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
