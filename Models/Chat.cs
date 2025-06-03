@@ -7,14 +7,15 @@ namespace HopIn_Server.Models
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string? chatId { get; set; }
+		public string? chatId { get; set; } = ObjectId.GenerateNewId().ToString();
 
-		[BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.String)]
 		public string person1Id { get; set; } = null!;
 
 		[BsonRepresentation(BsonType.String)]
 		public string person2Id { get; set; } = null!;
 		public List<Message> chatMessages { get; set; } = new List<Message>();
 		public DateTime chatLastUpdated { get; set; } = DateTime.UtcNow;
-	}
+
+    }
 }

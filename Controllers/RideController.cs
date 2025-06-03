@@ -139,7 +139,7 @@ namespace HopIn_Server.Controllers
 					return ApiResponse(400, false, "Passenger has already requested this ride.");
 
                 //initiating chat
-				var response = await _chatService.InitiateChatAsync(request.PassengerId, ride.riderId);
+				var response = await _chatService.InitiateChatAsync(request.PassengerId, ride.riderId , ride.rideId);
 
 				if (!response.success)
 					return ApiResponse(400, false, "Error initiating chat between the users!");

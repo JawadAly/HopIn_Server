@@ -7,9 +7,9 @@ namespace HopIn_Server.Models
 	{
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string? msgId { get; set; }
+		public string? msgId { get; set; } = ObjectId.GenerateNewId().ToString();
 
-		[BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.String)]
 		public string senderId { get; set; } = null!;
 		public string content { get; set; } = null!;
 		public DateTime msgCreatedAt { get; set; } = DateTime.UtcNow;

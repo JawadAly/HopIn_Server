@@ -56,43 +56,47 @@ namespace HopIn_Server.Controllers
 			return Ok(inbox);
 		}
 
-		[HttpGet("chats/{userId}")]
-		public async Task<IActionResult> GetChatsByUserId(string userId)
-		{
-			try
-			{
-				var inbxUser = await _userService.GetUserByIdAsync(userId);
-				if (inbxUser == null)
-					return ApiResponse(404, false, errorMsg: "No such user exists with inbox");
+        [HttpGet("chats/{userId}")]
+        public async Task<IActionResult> GetChatsByUserId(string userId)
+        {
+            try
+            {
+                var inbxUser = await _userService.GetUserByIdAsync(userId);
+                if (inbxUser == null)
+                    return ApiResponse(404, false, errorMsg: "No such user exists with inbox");
 
-				var incomingChats = await _inboxService.fetchInboxChats(inbxUser);
-				if (!incomingChats.success || incomingChats.chatsList == null) {
-					return ApiResponse(400, false,errorMsg: incomingChats.messsage);
-				}
+                var incomingChats = await _inboxService.fetchInboxChats(inbxUser);
+                if (!incomingChats.success || incomingChats.chatsList == null)
+                {
+                    return ApiResponse(400, false, errorMsg: incomingChats.messsage);
+                }
 
-				//creating new chat list according to new dto
-				var chatDtos = new List<ChatDto>();
-				foreach (var chat in incomingChats.chatsList)
-				{
-					var otherUser = await _userService.GetUserByIdAsync(chat.person2Id);					
-					if (otherUser == null) continue; // Skip if user not found
+                //creating new chat list according to new dto
+                var chatDtos = new List<ChatDto>();
+                foreach (var chat in incomingChats.chatsList)
+                {
+                    var isUserPerson1 = chat.person1Id == userId;
+                    var otherUserId = isUserPerson1 ? chat.person2Id : chat.person1Id;
+                    var otherUser = await _userService.GetUserByIdAsync(otherUserId);
+                    if (otherUser == null) continue;
 
-					chatDtos.Add(new ChatDto { 
-						chatId = chat.chatId,
-						person1 = inbxUser,
-						person2 = otherUser,
-						chatMessages = chat.chatMessages,
-						chatLastUpdated = chat.chatLastUpdated,
-					});
-				}
-				return ApiResponse(200, true, incomingChats.messsage,data:chatDtos);
-				//return ApiResponse(200, true, incomingChats.messsage,data:incomingChats.chatsList);
-			}
-			catch (Exception e)
-			{
-				return ApiResponse(500, false, "An unexpected error occurred.", errorMsg: e.Message);
-			}
-		}
+                    chatDtos.Add(new ChatDto
+                    {
+                        chatId = chat.chatId,
+                        person1 = inbxUser,
+                        person2 = otherUser,
+                        chatMessages = chat.chatMessages,
+                        chatLastUpdated = chat.chatLastUpdated,
+                    });
+                }
+                return ApiResponse(200, true, incomingChats.messsage, data: chatDtos);
+                //return ApiResponse(200, true, incomingChats.messsage,data:incomingChats.chatsList);
+            }
+            catch (Exception e)
+            {
+                return ApiResponse(500, false, "An unexpected error occurred.", errorMsg: e.Message);
+            }
+        }
 
-	}
+    }
 }
